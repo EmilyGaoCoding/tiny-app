@@ -10,13 +10,13 @@
       <% for (let url in urls) { %>
       <li><%= `${url}: ${urls[url]}` %></li>
 
-      <form method="/urls/<%= url %>/delete" action="POST">
-        <input type="submit" value="Delete"><
-        </form>
+      <form action="/urls/<%= url %>" method="GET">
+        <input type="submit" value="Edit">
+      </form>
 
-      <form method="/urls/<%= url %>/delete" action="POST">
-        <input type="submit" value="Delete"><
-        </form>
+      <form action="/urls/<%= url %>/delete" method="POST">
+        <input type="submit" value="Delete">
+      </form>
       <% } %>
     </ul>
 

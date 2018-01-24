@@ -9,7 +9,7 @@
   <h3>longURL: <b><%= longURL %></b></h3>
   <h3>shortURL: <b><%= shortURL %></b></h3>
 
-  <form action="/urls/<%= shortURL %>" method="POST">
+  <form action="/urls/<%= shortURL %>/update" method="POST">
     <label for="update_longURL">New Long URL</label>
     <input type="text" name="longURL_field" placeholder="new URL">
     <input type="submit" value="Update">

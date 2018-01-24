@@ -15,7 +15,7 @@ function generateRandomString() {
 
 }
 
-app.post("/urls/:id", (req, res) => {
+app.post("/urls/:id/update", (req, res) => {
   urlDatabase[req.params.id] = req.body.longURL_field;
   res.redirect("/urls");
 });
