@@ -13,9 +13,6 @@ const urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
-function generateRandomString() {
-}
-
 app.post("/logout", (req, res) => {
   res.clearCookie("username");
   res.redirect("/urls");
