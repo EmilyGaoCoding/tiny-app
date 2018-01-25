@@ -1,5 +1,5 @@
-<% if (username) { %>
-<p>You're logged in as: <%= username %></p>
+<% if (user_id) { %>
+<p>You're logged in as: <%= users[user_id].email %></p>
 <form action="/logout" method="POST">
   <input type="submit" value="Logout">
 </form>
