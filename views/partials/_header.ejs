@@ -1,8 +1,11 @@
+<% if (username) { %>
+<p>You're logged in as: <%= username %></p>
+<form action="/logout" method="POST">
+  <input type="submit" value="Logout">
+</form>
+<% } else { %>
 <form action="/login" method="POST">
   <input type="text" name="username" placeholder="username">
   <input type="submit" value="Submit">
 </form>
-
-<br>
-<br>
-<br>
+<% } %>

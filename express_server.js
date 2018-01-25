@@ -16,6 +16,11 @@ const urlDatabase = {
 function generateRandomString() {
 }
 
+app.post("/logout", (req, res) => {
+  res.clearCookie("username");
+  res.redirect("/urls");
+})
+
 app.post("/login", (req, res) => {
   res.cookie("username", req.body.username);
   res.redirect("/urls");
@@ -40,8 +45,10 @@ app.get("/u/:shortURL", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
-  if (req.cookies.username) { templateVars.username = req.cookies.username; }
+  let templateVars = {
+    urls: urlDatabase,
+    username: req.cookies.username
+  };
   res.render("urls_index", templateVars);
 });
 
@@ -57,9 +64,9 @@ app.post("/urls", (req, res) => {
 app.get("/urls/:id", (req, res) => {
   let templateVars = {
     shortURL: req.params.id,
-    longURL: urlDatabase[req.params.id]
+    longURL: urlDatabase[req.params.id],
+    username: req.cookies.username
   };
-  if (req.cookies.username) { templateVars.username = req.cookies.username; }
   res.render("urls_show", templateVars);
 });
 
