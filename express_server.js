@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080; // default port 8080
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
 app.set("view engine", "ejs")
 
 const urlDatabase = {
@@ -12,8 +14,12 @@ const urlDatabase = {
 };
 
 function generateRandomString() {
-
 }
+
+app.post("/login", (req, res) => {
+  res.cookie("username", req.body.username);
+  res.redirect("/urls");
+});
 
 app.post("/urls/:id/update", (req, res) => {
   urlDatabase[req.params.id] = req.body.longURL_field;
@@ -29,13 +35,13 @@ app.get("/u/:shortURL", (req, res) => {
   if (!urlDatabase[req.params.shortURL]) {
     res.send('Oops, seems like you entered an invalid short URL.');
   }
-
   let longURL = urlDatabase[req.params.shortURL];
   res.redirect(longURL);
 });
 
 app.get("/urls", (req, res) => {
   let templateVars = { urls: urlDatabase };
+  if (req.cookies.username) { templateVars.username = req.cookies.username; }
   res.render("urls_index", templateVars);
 });
 
@@ -53,6 +59,7 @@ app.get("/urls/:id", (req, res) => {
     shortURL: req.params.id,
     longURL: urlDatabase[req.params.id]
   };
+  if (req.cookies.username) { templateVars.username = req.cookies.username; }
   res.render("urls_show", templateVars);
 });
 

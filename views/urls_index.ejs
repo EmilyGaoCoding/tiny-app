@@ -4,23 +4,24 @@
   <title>TinyApp</title>
 </head>
 <body>
-    <% include partials/_header %>
+  <% include partials/_header %>
+  <p>You're logged in as: <%= username %></p>
 
-    <ul>
-      <% for (let url in urls) { %>
-      <li><%= `${url}: ${urls[url]}` %></li>
+  <ul>
+    <% for (let url in urls) { %>
+    <li><%= `${url}: ${urls[url]}` %></li>
 
-      <form action="/urls/<%= url %>" method="GET">
-        <input type="submit" value="Edit">
-      </form>
+    <form action="/urls/<%= url %>" method="GET">
+      <input type="submit" value="Edit">
+    </form>
 
-      <form action="/urls/<%= url %>/delete" method="POST">
-        <input type="submit" value="Delete">
-      </form>
-      <% } %>
-    </ul>
+    <form action="/urls/<%= url %>/delete" method="POST">
+      <input type="submit" value="Delete">
+    </form>
+    <% } %>
+  </ul>
 
-    <a href=''>shorten your link here</a>
+  <a href=''>shorten your link here</a>
 </body>
 </html>
 
