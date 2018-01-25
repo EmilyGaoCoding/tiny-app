@@ -28,12 +28,16 @@ app.get("/register", (req, res) => {
   res.render("urls_register");
 })
 
+app.get("/login", (req, res) => {
+  res.render("urls_login");
+})
+
 app.post("/register", (req, res) => {
   if (!req.body.email || !req.body.password) {
     res.status(400).send("Oops, you gotta fill out both email and password fields");
   }
   for (let user in usersDB) {
-    if (usersDB[user].username === req.body.email) {
+    if (usersDB[user].email === req.body.email) {
     res.status(400).send("Oops, seems like you already registerd with us");
     break;
   }}
@@ -50,13 +54,21 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("username");
+  res.clearCookie("user_id");
   res.redirect("/urls");
 });
 
 app.post("/login", (req, res) => {
-  res.cookie("username", req.body.username);
-  res.redirect("/urls");
+  for (let user in usersDB) {
+    if (req.body.email === usersDB[user].email) {
+      if (req.body.password === usersDB[user].password) {
+        res.cookie("user_id", usersDB[user].id);
+      }
+      res.status(403).send("That's not a valid email and password pairing.");
+    }
+    res.status(403).send("That's not a valid email and password pairing.");
+  }
+  res.redirect("/");
 });
 
 app.post("/urls/:id/update", (req, res) => {
@@ -84,8 +96,7 @@ app.get("/urls/new", (req, res) => {
 app.get("/urls", (req, res) => {
   let templateVars = {
     urls: urlDatabase,
-    users: usersDB,
-    user_id: req.cookies.user_id
+    user: usersDB[req.cookies.user_id]
   };
   res.render("urls_index", templateVars);
 });
@@ -99,8 +110,7 @@ app.get("/urls/:id", (req, res) => {
   let templateVars = {
     shortURL: req.params.id,
     longURL: urlDatabase[req.params.id],
-    users: usersDB,
-    user_id: req.cookies.user_id
+    user: usersDB[req.cookies.user_id]
   };
   res.render("urls_show", templateVars);
 });

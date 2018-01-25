@@ -1,11 +1,18 @@
-<% if (user_id) { %>
-<p>You're logged in as: <%= users[user_id].email %></p>
+<% if (user) { %>
+<p>You're logged in as: <%= user.email %></p>
+
 <form action="/logout" method="POST">
-  <input type="submit" value="Logout">
+    <input type="submit" value="" />
 </form>
+
 <% } else { %>
-<form action="/login" method="POST">
-  <input type="text" name="username" placeholder="username">
-  <input type="submit" value="Submit">
+
+<form action="/register" method="GET">
+    <input type="submit" value="Register">
 </form>
+
+<form action="/login" method="GET">
+    <input type="submit" value="Login">
+</form>
+
 <% } %>
