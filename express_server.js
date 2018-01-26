@@ -93,7 +93,7 @@ app.post("/urls/:id", (req, res) => {
     if (urlsDB.hasOwnProperty(req.params.id)) {
       if (req.session.user_id === urlsDB[req.params.id].userID) {
         urlsDB[req.params.id].fullURL = req.body.longURL_field;
-        res.redirect("/url");
+        res.redirect("/urls");
       } else { res.send("You don't own this short URL."); }
     } else { res.send("This short URL doesn't exist."); }
   } else { res.send("Log in first to view your short URLs."); }
@@ -134,8 +134,6 @@ app.get("/urls", (req, res) => {
     urls: urlsForUser(req.session.user_id),
     user: usersDB[req.session.user_id]
   };
-  console.log(urlsDB);
-  console.log(usersDB);
   res.render("urls_index", templateVars);
 });
 
