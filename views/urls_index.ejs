@@ -6,9 +6,10 @@
 <body>
   <% include partials/_header %>
 
+  <% if (user) { %>
   <ul>
     <% for (let url in urls) { %>
-    <li><%= `${url}: ${urls[url]}` %></li>
+    <li><%= `${url}: ${urls[url].fullURL}` %></li>
 
     <form action="/urls/<%= url %>" method="GET">
       <input type="submit" value="Edit">
@@ -19,7 +20,9 @@
     </form>
     <% } %>
   </ul>
-
+  <% } else { %>
+  <p>Please register or log in to view your shortened URLs.</p>
+  <% }; %>
   <a href=''>shorten your link here</a>
 </body>
 </html>
