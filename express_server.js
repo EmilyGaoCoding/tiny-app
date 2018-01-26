@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 8080; // default port 8080
 const usersDB = require("./user_database");
 const urlsDB = require("./url_database");
 
+const moment = require("moment");
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -143,7 +145,8 @@ app.post("/urls", (req, res) => {
     urlsDB[shortURL] = {
       userID: req.session.user_id,
       tinyURL: shortURL,
-      fullURL: req.body.longURL
+      fullURL: req.body.longURL,
+      date: moment().format('MMM D, YYYY')
     };
     let templateVars = {
       urls: urlsForUser(req.session.user_id),
@@ -176,10 +179,6 @@ app.get("/", (req, res) => {
   if (req.session.user_id) {
     res.redirect("/urls");
   } else { res.redirect("/login");}
-});
-
-app.get("/hello", (req, res) => {
-  res.end("<html><body>Hello <b>World</b></body></html>\n");
 });
 
 app.listen(PORT, () => {

@@ -10,7 +10,7 @@
   <ul>
     <% for (let url in urls) { %>
     <li><%= `${url}: ${urls[url].fullURL}` %></li>
-
+    <p>Date Created: <%= urls[url].date %></p>
     <form action="/urls/<%= url %>" method="GET">
       <input type="submit" value="Edit">
     </form>
