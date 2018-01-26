@@ -1,6 +1,6 @@
 const urlsDB = {
   "b2xVn2": {
-    userID: "userRandomID",
+    userID: "user1RandomID",
     tinyURL: "b2xVn2",
     fullURL: "http://www.lighthouselabs.ca"
   },
