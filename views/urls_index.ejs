@@ -20,12 +20,14 @@
     </form>
     <% } %>
   </ul>
-  <% } else { %>
-  <p>Please register or log in to view your URLs.</p>
-  <% }; %>
+
   <form action="/urls/new" method="GET">
     <input type="submit" value="Create a New Short Link">
   </form>
+  <% } else { %>
+  <p>Please register or log in to view your URLs.</p>
+  <% }; %>
+
 </body>
 </html>
 

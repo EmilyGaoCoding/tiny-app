@@ -5,10 +5,11 @@
 </head>
 <body style="font-size:20px; padding:50px;">
   <% include partials/_header %>
-  <h3 style="margin:50px";>shortURL: <%= shortURL %></h3>
+  <h3 style="margin:50px;">shortURL: <%= shortURL %></h3>
+  <p style="margin:50px;">Date Created: <%= urls[shortURL].date %></p>
   <form action="/urls/<%= shortURL %>" method="POST" style="margin:50px">
     <label for="update_longURL"><%= urls[shortURL].fullURL %></label>
-    <input type="text" name="longURL_field" placeholder="new URL">
+    <input type="text" name="longURL_field" placeholder="Update the URL">
     <input type="submit" value="Update">
   </form>
 </body>
